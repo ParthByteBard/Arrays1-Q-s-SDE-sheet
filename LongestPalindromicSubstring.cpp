@@ -58,3 +58,72 @@ string longestPalinSubstring(string str) {
 // TC=O(n3)
 // SC=O(n)
 
+
+// slightly optimized version
+// INSTEAD OF USING A TEMP AND ANS STRING WE ARE PLAYING WITH INDICES, AVOIDING THE EXTRA SPACE THAT
+// WE ARE GONNA USE BY temp and ans variables
+// This function checks if a substring of a given string is a palindrome.
+// It takes the string, starting index (s), and ending index (e) as input.
+// It returns true if the substring is a palindrome, false otherwise.
+bool isPalindrome(string& str, int s, int e) {
+  // Iterate while the starting index is less than or equal to the ending index.
+  while (s <= e) {
+    // If the characters at the starting and ending indices are not equal,
+    // the substring is not a palindrome, so return false.
+    if (str[s++] != str[e--]) {
+      return false;
+    }
+  }
+  // If the loop completes without returning false, then all characters
+  // were matched, so the substring is a palindrome, so return true.
+  return true;
+}
+
+// This function finds the longest palindromic substring starting from a given index.
+// It takes the string, starting index (i), reference to the starting index of the
+// longest substring found so far (start), and reference to the length of the longest
+// substring found so far (mx) as input. It updates start and mx if a longer
+// palindromic substring is found starting from index i.
+void solve(string& str, int i, int& start, int& mx) {
+  // Get the length of the string.
+  int n = str.length();
+
+  // Iterate from the current index (i) to the end of the string.
+  for (int j = i; j < n; j++) {
+    // Check if the substring from index i to index j is a palindrome.
+    if (isPalindrome(str, i, j)) {
+      // Calculate the length of the current substring.
+      int currentLength = j - i + 1;
+
+      // If the current substring is longer than the longest one found so far,
+      // update start and mx.
+      if (currentLength > mx) {
+        start = i;
+        mx = currentLength;
+      }
+    }
+  }
+}
+
+// This function finds the longest palindromic substring in a given string.
+// It takes the string as input and returns the longest palindromic substring.
+string longestPalinSubstring(string str) {
+  // Initialize variables to keep track of the starting index and length
+  // of the longest palindromic substring found so far.
+  int start = 0;
+  int mx = 0;
+  int n = str.length();
+
+  // Iterate from the beginning of the string to the end.
+  for (int i = 0; i < n; i++) {
+    // Call the solve function to find the longest palindromic substring
+    // starting from the current index.
+    solve(str, i, start, mx);
+  }
+
+  // Return the longest palindromic substring found.
+  return str.substr(start, mx);
+}
+
+// TC=O(N3)
+// SC=O(1)
