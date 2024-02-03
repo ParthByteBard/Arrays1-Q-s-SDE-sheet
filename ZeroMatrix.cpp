@@ -55,7 +55,7 @@ vector<vector<int>> zeroMatrix(vector<vector<int>> &matrix, int n, int m)
 void markMatrix(vector<vector<int>> &matrix, int n, int m, int r, int c)
 {
 
-    // alwarys before marking -1 check if the current element underpocessing is not zero, if it is zero
+    // always before marking -1 check if the current element underpocessing is not zero, if it is zero
     // it means it can potentially make rows and coloumns corresponding to it zero, so we leave it
     for (int i = 0; i < m; i++)
     {
