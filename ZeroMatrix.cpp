@@ -26,7 +26,7 @@ vector<vector<int>> zeroMatrix(vector<vector<int>> &matrix, int n, int m)
     {
         for (int j = 0; j < m; j++)
         {
-            // ele at i,j is zero so add i,j to pair
+            // ele at i,j is zero so add i,j to allPairs
             if (matrix[i][j] == 0)
             {
                 p = make_pair(i, j);
