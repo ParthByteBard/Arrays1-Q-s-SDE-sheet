@@ -5,6 +5,10 @@ using namespace std;
 
 float binaryExponentiation(float &base,int &exp){
     
+    if(base==0 && exp==0){
+        cout<<"Undefined behavior!"<<endl;
+        return -404;
+    }
     if(base==1 || exp==0) return 1;
     
     float res=1;
@@ -12,6 +16,7 @@ float binaryExponentiation(float &base,int &exp){
         
         if(exp%2==1){
             res*=base;
+            exp--;
         }
         
         base=base*base;
